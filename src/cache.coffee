@@ -54,6 +54,7 @@ class ConnectFileCache
 
     {flags} = _.defaults cacheHash, flags: {}
     res.setHeader 'Content-Type', flags.mime ? mime.lookup(route)
+    res.setHeader 'Cache-Control', 'public' if flags.public is true
     res.setHeader 'Expires', FAR_FUTURE_EXPIRES if flags.expires is false
     res.setHeader 'Last-Modified', cacheTimestamp.toUTCString()
     if flags.attachment is true
